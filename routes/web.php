@@ -20,6 +20,7 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::delete('/posts/{post}', 'delete')->name('delete');
     Route::get('/posts/{post}/edit', 'edit')->name('edit');
     Route::post('/comments/{post}', 'comment')->name('comment');
+    Route::delete('/comments/{post}/{comment}', 'commentDelete')->name('commentDelete');
 });
 
 Route::get('/categories/{category}', [CategoryController::class,'index'])->middleware("auth");
