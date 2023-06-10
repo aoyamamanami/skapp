@@ -14,7 +14,8 @@ class PostController extends Controller
 {
     public function index(Post $post)
     {
-        return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);
+        $categories = Category::get();
+        return view('posts/index')->with(['posts' => $post->getPaginateByLimit(), 'categories' => $categories]);
     }
 
     public function show(Post $post)
