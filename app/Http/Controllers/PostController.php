@@ -84,4 +84,10 @@ class PostController extends Controller
         return redirect('/posts/' . $post->id);
     }
     
+    public function commentDelete(Post $post, Comment $comment)
+    {
+        $comment->delete();
+        return redirect('/posts/'.$post->id);
+    }
+    
 }
