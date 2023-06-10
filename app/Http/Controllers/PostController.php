@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Http;
+
 
 class PostController extends Controller
 {
@@ -29,8 +31,27 @@ class PostController extends Controller
     public function store(Post $post, Request $request)
     {
         $input = $request['post'];
-        $post->fill($input)->save();
-        return redirect('/posts/' . $post->id);
+        $sentence = $input["body"];
+        
+        
+        $key = env('DEEPL_KEY');
+        
+        
+
+        $response = Http::get(
+            'https://api-free.deepl.com/v2/translate',
+            [
+                'auth_key' => $key,
+                'target_lang' => 'EN',
+                'source_lang' => 'JA',
+                'text' => $sentence,
+            ]
+            );
+            
+            $translation = $response->json('translations')[0]['text'];
+            $input["translation"] = $translation;
+            $post->fill($input)->save();
+            return redirect('/posts/' . $post->id);
     }
 
     public function edit(Post $post)
