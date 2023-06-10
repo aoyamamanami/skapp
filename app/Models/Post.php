@@ -4,14 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
+    use SoftDeletes;
     use HasFactory;
 
     protected $fillable = [
         'title',
         'body',
+        'translation',
         'category_id',
     ];
 
@@ -24,5 +27,9 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 }
