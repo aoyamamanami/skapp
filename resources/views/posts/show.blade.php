@@ -26,6 +26,10 @@
                 <input type="submit" value="送信"/>
                 @foreach($comments as $comment)
                     <p>{{ $comment -> body}} commentted by {{ $comment->user->name }}</p>
+                    @if(auth()->user()->id === $comment->user_id)
+                        <button>削除</button>
+                    @endif
+                    <p>{{ $comment->created_at }}</p>
                 @endforeach
             </div>
         </form>
