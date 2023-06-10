@@ -18,5 +18,16 @@
             <p class="edit">[<a href="/posts/{{ $post->id }}/edit">編集</a>]</p>
             <a href="/">戻る</a>
         </div>
+        <form  action="/comments/{{ $post->id }}" method="POST">
+        @csrf
+            <div>
+                <h2>コメント一覧</h2>
+                <textarea name="comment" rows="5" cols="100" placeholder="コメント送信"></textarea>
+                <input type="submit" value="送信"/>
+                @foreach($comments as $comment)
+                    <p>{{ $comment -> body}} commentted by {{ $comment->user->name }}</p>
+                @endforeach
+            </div>
+        </form>
     </body>
 </html>
