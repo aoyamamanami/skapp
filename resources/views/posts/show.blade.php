@@ -12,6 +12,7 @@
         <div>
             <p>タイトル：{{ $post->title }}</p>
             <p>本文：{{ $post->body }}</p>
+            <p>英訳：{{ $post->translation }}</p>
             <p>カテゴリー：<a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a></p>
         </div>
         <div>
