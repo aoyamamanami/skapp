@@ -110,7 +110,8 @@ class PostController extends Controller
             'post_likes_count' => $post_likes_count,
         ];
         return response()->json($param); // JSONデータをjQueryに返す
-
+    }
+    
     public function commentDelete(Post $post, Comment $comment)
     {
         $comment->delete();
