@@ -9,6 +9,8 @@ class CategoryController extends Controller
 {
     public function index(Category $category)
     {
-        return view('categories.index')->with(['posts' => $category->getByCategory(), 'category_name' => $category->name]);
+        $user = auth()->user();
+        $categories = Category::get();
+        return view('categories.index')->with(['posts' => $category->getByCategory(), 'categories' => $categories]);
     }
 }
