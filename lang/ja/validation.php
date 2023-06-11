@@ -172,6 +172,7 @@ return [
     'attributes' => [
         'post.title' => 'タイトル',
         'post.body' => '本文',
+        'comment' => 'コメント'
         ],
 
 ];

@@ -10,6 +10,15 @@
             <form action="/posts/{{ $post->id }}" method="POST">
                 @csrf
                 @method('PUT')
+                
+                @error('post.title')
+                    <p>{{ $message }}</p>
+                @enderror
+                
+                @error('post.body')
+                    <p>{{ $message }}</p>
+                @enderror
+                
                 <div class='content__title'>
                     <h2>タイトル</h2>
                     <input type='text' name='post[title]' value="{{ $post->title }}">

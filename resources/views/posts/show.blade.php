@@ -26,11 +26,13 @@
                 </h1>
             </div>
         </div>
+
         <div class="show-content">
             <h1>{{ $post->title }}<span>{{ $post->category->name }}</span></h1>
             <div class="show-text">
                 <p id="origin-text">【原文】<br>{{ $post->body }}</p>
                 <p id="translated-text" class="text-hidden">【翻訳文】<br>{{ $post->translation }}</p>
+
             </div>
             <div class="btn-elem">
                 
@@ -51,6 +53,9 @@
             @csrf
                 <div class="comment-block">
                     <h2>コメント一覧</h2>
+                    @error('comment')
+                        <p>{{ $message }}</p>
+                    @enderror
                     <textarea name="comment" rows="5" cols="100" placeholder="コメント送信"></textarea>
                     <div class="submit-elem">
                         <input type="submit" value="送信"/>
