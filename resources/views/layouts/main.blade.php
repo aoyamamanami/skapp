@@ -40,11 +40,13 @@
                         </div>
                         @endguest
                         @auth
+                        <div class="logout-btn">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
     
                                 <button type="submit">logout</button>
                             </form>
+                        </div>
                         @endauth
                     </div>
                 </header>
