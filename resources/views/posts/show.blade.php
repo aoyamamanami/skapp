@@ -44,15 +44,19 @@
                     
             @auth
                 @if(auth()->user()->id === $post->user_id)
-                    <p class="edit">[<a href="/posts/{{ $post->id }}/edit">編集</a>]</p>
+                    <a href="/posts/{{ $post->id }}/edit">編集</a>
                 @endif
             @endauth
                     <button id="translate-btn">翻訳</button>
-                    <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button class="delete-btn" type="button" onclick="deletePost({{ $post->id }})">削除</button> 
-                    </form>
+                    @auth
+                        @if(auth()->user()->id === $post->user_id)
+                        <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="delete-btn" type="button" onclick="deletePost({{ $post->id }})">削除</button> 
+                        </form>
+                        @endif
+                    @endauth
                     <a href="/">戻る</a>
                 </div>
             </div>
