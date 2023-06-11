@@ -33,11 +33,19 @@
                         <div class="header-logo">
                             <a href="/"><img src="{{ asset("images/header-logo.png") }}" /></a>
                         </div>
-                        <div class="header-list">
-                            <ul>
-                                <li><a href="/"></a></li>
-                            </ul>
+                        @guest
+                        <div class="header-btn">
+                            <a href="/login">log in</a>
+                            <a href="/register">sign up</a>
                         </div>
+                        @endguest
+                        @auth
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+    
+                                <button type="submit">logout</button>
+                            </form>
+                        @endauth
                     </div>
                 </header>
             <!-- Page Content -->

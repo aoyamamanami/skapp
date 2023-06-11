@@ -11,12 +11,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::controller(PostController::class)->middleware(['auth'])->group(function(){
+Route::controller(PostController::class)->group(function(){
     Route::get('/', 'index')->name('index');
+    Route::get('/posts/{post}', 'show')->name('show');
+});
+
+Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::post('/posts', 'store')->name('store');
     Route::get('/posts/create', 'create')->name('create');
     Route::post('/posts/like', 'like')->name('posts.like');
-    Route::get('/posts/{post}', 'show')->name('show');
     Route::put('/posts/{post}', 'update')->name('update');
     Route::delete('/posts/{post}', 'delete')->name('delete');
     Route::get('/posts/{post}/edit', 'edit')->name('edit');
