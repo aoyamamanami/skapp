@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Support\Facades\Http;
+use App\Http\Requests\PostRequest;
 
 
 class PostController extends Controller
@@ -32,7 +33,7 @@ class PostController extends Controller
         return view('posts/create')->with(['categories' => $category->get()]);
     }
 
-    public function store(Post $post, Request $request)
+    public function store(Post $post, PostRequest $request)
     {
         $input = $request['post'];
         $sentence = $input["body"];
