@@ -14,7 +14,11 @@
             <button id="translate-btn">翻訳</button>
         </div>
         <div>
-            <p class="edit">[<a href="/posts/{{ $post->id }}/edit">編集</a>]</p>
+            @auth
+            @if(auth()->user()->id === $post->user_id)
+                <p class="edit">[<a href="/posts/{{ $post->id }}/edit">編集</a>]</p>
+            @endif
+            @endauth
             <a href="/">戻る</a>
         </div>
         <form  action="/comments/{{ $post->id }}" method="POST">
