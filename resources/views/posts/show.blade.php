@@ -7,7 +7,7 @@
         <div>
             <p>タイトル：{{ $post->title }}</p>
             <p id="origin-text">本文：{{ $post->body }}</p>
-            <p id="translated-text" class="text-hidden">英訳：{{ $post->translation }}</p>
+            <p id="translated-text" class="text-hidden">訳：{{ $post->translation }}</p>
             <p>カテゴリー：<a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a></p>
         </div>
         <div>
