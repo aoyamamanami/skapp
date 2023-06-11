@@ -18,9 +18,12 @@
             <a href="/">戻る</a>
         </div>
         <form  action="/comments/{{ $post->id }}" method="POST">
-        @csrf
+        @csrｆｆ
             <div>
                 <h2>コメント一覧</h2>
+                @error('comment')
+                    <p>{{ $message }}</p>
+                @enderror
                 <textarea name="comment" rows="5" cols="100" placeholder="コメント送信"></textarea>
                 <input type="submit" value="送信"/>
             </div>
