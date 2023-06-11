@@ -31,7 +31,11 @@
             <div class="bc-inner">
                 <h2>-Post List-</h2>
                 <div class="top-navigation flex">
-                    <a class="to-create" href='/posts/create'>新規投稿</a>
+                    @auth
+                        <a class="to-create" href='/create'>新規投稿</a>
+                    @else
+                        <a class="to-create" href='/login'>新規投稿</a>
+                    @endauth
                     <div class="category-nav">
                         <ul class="b-flex">
                             @foreach($categories as $category)
