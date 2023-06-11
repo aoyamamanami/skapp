@@ -36,24 +36,34 @@ class PostController extends Controller
     {
         $input = $request['post'];
         $sentence = $input["body"];
-        
-        
         $key = env('DEEPL_KEY');
-        
-        
+            if (preg_match("/[ぁ-ん]+|[ァ-ヴー]+|[一-龠]/u", $sentence)){
+                $response = Http::get(
+                    'https://api-free.deepl.com/v2/translate',
+                    [
+                        'auth_key' => $key,
+                        'target_lang' => 'EN',
+                        'source_lang' => 'JA',
+                        'text' => $sentence,
+                    ]
+                    );
+            } else {
+                $response = Http::get(
+                    'https://api-free.deepl.com/v2/translate',
+                    [
+                        'auth_key' => $key,
+                        'target_lang' => 'JA',
+                        'source_lang' => 'EN',
+                        'text' => $sentence,
+                    ]
+                    );
 
-        $response = Http::get(
-            'https://api-free.deepl.com/v2/translate',
-            [
-                'auth_key' => $key,
-                'target_lang' => 'EN',
-                'source_lang' => 'JA',
-                'text' => $sentence,
-            ]
-            );
-            
-            $translation = $response->json('translations')[0]['text'];
-            $input["translation"] = $translation;
+            }
+
+               
+                    
+                $translation = $response->json('translations')[0]['text'];
+                $input["translation"] = $translation;
             $post->fill($input)->save();
             return redirect('/posts/' . $post->id);
     }
