@@ -31,11 +31,7 @@
             <div class="bc-inner">
                 <h2>-Post List-</h2>
                 <div class="top-navigation flex">
-                    @auth
-                        <a class="to-create" href='/create'>新規投稿</a>
-                    @else
-                        <a class="to-create" href='/login'>新規投稿</a>
-                    @endauth
+                    <a class="to-create" href='/posts/create'>新規投稿</a>
                     <div class="category-nav">
                         <ul class="b-flex">
                             @foreach($categories as $category)
@@ -57,6 +53,11 @@
                                 </div>
                             </a>
                             <div class="post-bottom">
+                                 <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" onclick="deletePost({{ $post->id }})">delete</button> 
+                                </form>
                                 @auth
                                 <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
                                 @if (!$post->isLikedBy(Auth::user()))

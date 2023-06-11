@@ -52,6 +52,9 @@
             <main>
                 {{ $slot }}
             </main>
+            <footer class="footer">
+                <h3>&copy;Team Development</h3>
+            </footer>
         </div>
     </body>
     <script src="{{ asset("js/common.js") }}"></script>
