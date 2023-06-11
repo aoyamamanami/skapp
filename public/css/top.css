@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 .first-view {
     margin-top: 80px;
     position: relative;
@@ -7,11 +8,88 @@
     background-position: center;
 }
 
-.first-view h1 {
+.fv-inner {
+    width: 85%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.back-title {
     /*color: white;*/
     font-weight: bold;
-    font-size: 40px;
-    text-shadow: 2px 2px 0px #ffffff, 3px 3px 2px #663333;
+    font-size: 48px;
+    /*color: grey;*/
+    color: transparent;
+    text-shadow: 0 0 10px rgba(255, 255, 255,0.2);
+    /*font-family: 'Josefin Sans', sans-serif;*/
+    font-family: 'Corben', cursive;
+}
+
+.title {
+    font-weight: bold;
+    display: flex;
+    overflow: hidden;
+    color: white;
+    font-size: 48px;
+    /*font-family: 'Josefin Sans', sans-serif;*/
+    font-family: 'Corben', cursive;
+}
+
+.title span {
+  display: block;
+  transform: translate(0, 105%);
+  transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+}
+
+.title.-visible span {
+  transform: translate(0, 0);
+}
+
+.title span:nth-child(2) {
+  transition-delay: 0.06s;
+}
+.title span:nth-child(3) {
+  transition-delay: 0.12s;
+}
+.title span:nth-child(4) {
+  transition-delay: 0.18s;
+}
+.title span:nth-child(5) {
+  transition-delay: 0.24s;
+}
+.title span:nth-child(6) {
+  transition-delay: 0.30s;
+}
+.title span:nth-child(7) {
+  transition-delay: 0.36s;
+}
+.title span:nth-child(8) {
+  transition-delay: 0.42s;
+}
+.title span:nth-child(9) {
+  transition-delay: 0.48s;
+}
+.title span:nth-child(10) {
+  transition-delay: 0.54s;
+}
+.title span:nth-child(11) {
+  transition-delay: 0.6s;
+}
+.title span:nth-child(12) {
+  transition-delay: 0.66s;
+}
+.title span:nth-child(13) {
+  transition-delay: 0.72s;
+}
+.title span:nth-child(14) {
+  transition-delay: 0.78s;
+}
+
+.title span:nth-child(15) {
+  transition-delay: 0.84s;
+}
+.title span:nth-child(16) {
+  transition-delay: 0.90s;
 }
 
 .blog-container {
@@ -69,17 +147,78 @@
     color: white;
 }
 
-.blog-content {
+.posts {
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.post-content {
+    width: 30%;
     position:relative;
+    padding-bottom: 45px;
     top: 0px;
-    padding: 30px 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    border-radius: 10px;
+    margin-bottom: 35px;
     box-shadow: 0 2px 2px 0 rgba(152, 149, 149, 0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
     transition: .2s;
 }
 
-.blog-content:hover {
+.post-content span {
+  margin-right: 10px;
+}
+
+.post-content:hover {
     transition: .2s;
     top: -5px;
+}
+
+.post-img-box {
+  width: 100%;
+}
+
+.post-img-box img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transition: .3s;
+}
+
+.post-img-hover {
+  transform: scale(.8, .8);
+  transition: .3s;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.post-text {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.post-title {
+  margin: 10px 0 5px 0;
+  font-weight: bold;
+}
+
+.post-body {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-bottom {
+  position: absolute;
+  width: 100%;
+  bottom: 5px;
+  text-align: right;
+}
+
+.liked {
+    color: rgb(225, 58, 86);
+}
+
+.like-toggle {
+    cursor: pointer;
 }
