@@ -2,6 +2,7 @@
     <x-slot name="head">
         <link rel="stylesheet" href="{{ asset('/css/top.css') }}">
         <link rel="stylesheet" href="{{ asset('/css/create.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Corben:700" rel="stylesheet">
     </x-slot>
     <div class="first-view" style="background-image: url({{ asset('images/space.jpg') }});">
         <div class="fv-inner">
@@ -57,4 +58,5 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/top.js') }}"></script>
 </x-main-layout>
