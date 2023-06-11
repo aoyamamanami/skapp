@@ -1,19 +1,17 @@
-<!DOCTYPE HTML>
-<html lang="{{ str_replace("_", "-", app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Posts</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
+<x-main-layout>
+    <x-slot name="head">
+        <link rel="stylesheet" href="{{ asset('/css/top.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Corben:700" rel="stylesheet">
+    </x-slot>
         <h1>詳細画面</h1>
         <div>
             <p>タイトル：{{ $post->title }}</p>
-            <p>本文：{{ $post->body }}</p>
-            <p>英訳：{{ $post->translation }}</p>
+            <p id="origin-text">本文：{{ $post->body }}</p>
+            <p id="translated-text" class="text-hidden">英訳：{{ $post->translation }}</p>
             <p>カテゴリー：<a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a></p>
+        </div>
+        <div>
+            <button id="translate-btn">翻訳</button>
         </div>
         <div>
             <p class="edit">[<a href="/posts/{{ $post->id }}/edit">編集</a>]</p>
@@ -50,5 +48,5 @@
                 }
             }
         </script>
-    </body>
-</html>
+         <script src="{{ asset('js/show.js') }}"></script>
+</x-main-layout>

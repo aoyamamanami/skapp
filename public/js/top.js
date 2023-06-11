@@ -22,3 +22,5 @@ postContentElements.forEach((postContentElement) => {
     postImgElement.classList.remove('post-img-hover');
   });
 });
+
+

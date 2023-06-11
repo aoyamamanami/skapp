@@ -18,7 +18,7 @@ Route::controller(PostController::class)->group(function(){
 
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::post('/posts', 'store')->name('store');
-    Route::get('/posts/create', 'create')->name('create');
+    Route::get('/create', 'create')->name('create');
     Route::post('/posts/like', 'like')->name('posts.like');
     Route::put('/posts/{post}', 'update')->name('update');
     Route::delete('/posts/{post}', 'delete')->name('delete');

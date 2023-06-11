@@ -222,3 +222,11 @@
 .like-toggle {
     cursor: pointer;
 }
+
+.text-hidden {
+    display: none;
+}
+
+.text-open {
+    display: block;
+}
