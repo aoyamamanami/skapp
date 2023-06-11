@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('body', 200);
             $table->string('translation', 1000)->nullable();
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('user_id')->constrained();;
+            $table->foreignId('user_id')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

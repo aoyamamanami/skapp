@@ -74,6 +74,7 @@ class PostController extends Controller
 
     public function update(PostRequest $request, Post $post)
     {
+
         $input_post = $request['post'];
         $sentence = $input_post['body'];
         
@@ -100,6 +101,7 @@ class PostController extends Controller
         $translation = $response->json('translations')[0]['text'];
         $input_post["translation"] = $translation;
         
+
         $post->fill($input_post)->save();
 
         return redirect('/posts/' . $post->id);

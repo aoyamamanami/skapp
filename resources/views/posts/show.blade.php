@@ -3,6 +3,7 @@
         <link rel="stylesheet" href="{{ asset('/css/top.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Corben:700" rel="stylesheet">
     </x-slot>
+
         <div class="first-view" style="background-image: url({{ asset('images/space.jpg') }});">
             <div class="fv-inner">
                 <h1 class="abs-center back-title">Team Development</h1>
@@ -25,6 +26,7 @@
                   <span>t</span>
                 </h1>
             </div>
+
         </div>
 
         <div class="show-content">
@@ -39,7 +41,12 @@
             </div>
             <div class="btn-flex">
                 <div class="btn-flex-inner flex">
-                    <a href="/posts/{{ $post->id }}/edit">編集</a>
+                    
+            @auth
+                @if(auth()->user()->id === $post->user_id)
+                    <p class="edit">[<a href="/posts/{{ $post->id }}/edit">編集</a>]</p>
+                @endif
+            @endauth
                     <button id="translate-btn">翻訳</button>
                     <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
                         @csrf
