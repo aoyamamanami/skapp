@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Support\Facades\Http;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\CommentRequest;
 
 
 class PostController extends Controller
@@ -39,33 +40,31 @@ class PostController extends Controller
         $sentence = $input["body"];
         
         $key = env('DEEPL_KEY');
-            if (preg_match("/[ぁ-ん]+|[ァ-ヴー]+|[一-龠]/u", $sentence)){
-                $response = Http::get(
-                    'https://api-free.deepl.com/v2/translate',
-                    [
-                        'auth_key' => $key,
-                        'target_lang' => 'EN',
-                        'source_lang' => 'JA',
-                        'text' => $sentence,
-                    ]
-                    );
-            } else {
-                $response = Http::get(
-                    'https://api-free.deepl.com/v2/translate',
-                    [
-                        'auth_key' => $key,
-                        'target_lang' => 'JA',
-                        'source_lang' => 'EN',
-                        'text' => $sentence,
-                    ]
-                    );
-
-            }
-                $translation = $response->json('translations')[0]['text'];
-                $input["translation"] = $translation;
-                
-            $post->fill($input)->save();
-            return redirect('/posts/' . $post->id);
+        
+        if (preg_match("/[ぁ-ん]+|[ァ-ヴー]+|[一-龠]/u", $sentence)){
+            $source = 'JA';
+            $target = 'EN';
+        } else {
+            $source = 'EN';
+            $target = 'JA';
+        }
+        
+        $response = Http::get(
+            'https://api-free.deepl.com/v2/translate',
+            [
+                'auth_key' => $key,
+                'target_lang' => $target,
+                'source_lang' => $source,
+                'text' => $sentence,
+            ]
+        );
+        
+        $translation = $response->json('translations')[0]['text'];
+        $input["translation"] = $translation;
+        $input["user_id"] = Auth::id();
+        
+        $post->fill($input)->save();
+        return redirect('/posts/' . $post->id);
     }
 
     public function edit(Post $post)
@@ -73,10 +72,36 @@ class PostController extends Controller
         return view('posts/edit')->with(['post' => $post]);
     }
 
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        $user_id = Auth::user()->id;
+
         $input_post = $request['post'];
+        $sentence = $input_post['body'];
+        
+        $key = env('DEEPL_KEY');
+        
+        if (preg_match("/[ぁ-ん]+|[ァ-ヴー]+|[一-龠]/u", $sentence)){
+            $source = 'JA';
+            $target = 'EN';
+        } else {
+            $source = 'EN';
+            $target = 'JA';
+        }
+        
+        $response = Http::get(
+            'https://api-free.deepl.com/v2/translate',
+            [
+                'auth_key' => $key,
+                'target_lang' => $target,
+                'source_lang' => $source,
+                'text' => $sentence,
+            ]
+        );
+        
+        $translation = $response->json('translations')[0]['text'];
+        $input_post["translation"] = $translation;
+        
+
         $post->fill($input_post)->save();
 
         return redirect('/posts/' . $post->id);
@@ -88,7 +113,7 @@ class PostController extends Controller
         return redirect('/');
     }
 
-    public function comment(Request $request, Comment $comment, Post $post)
+    public function comment(CommentRequest $request, Comment $comment, Post $post)
     {
         $comment->body = $request['comment'];
         $comment->post_id = $post->id;
