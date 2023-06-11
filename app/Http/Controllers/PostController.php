@@ -75,6 +75,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $input_post = $request['post'];
+        $user_id = Auth::user()->id;
         $post->fill($input_post)->save();
 
         return redirect('/posts/' . $post->id);
