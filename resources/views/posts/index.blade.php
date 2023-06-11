@@ -57,11 +57,6 @@
                                 </div>
                             </a>
                             <div class="post-bottom">
-                                 <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" onclick="deletePost({{ $post->id }})">delete</button> 
-                                </form>
                                 @auth
                                 <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
                                 @if (!$post->isLikedBy(Auth::user()))
@@ -83,16 +78,6 @@
                 
             </div>
         </div>
-        
-        <script>
-            function deletePost(id) {
-                'use strict'
-        
-                if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
-                    document.getElementById(`form_${id}`).submit();
-                }
-            }
-        </script>
         <script src="{{ asset('js/top.js') }}"></script>
     </body>
 </x-main-layout>

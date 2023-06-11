@@ -5,7 +5,7 @@ translateBtn.addEventListener('click', function() {
     if(translateBtn.textContent === '翻訳'){
         text.classList.add('text-hidden');
         textChange.classList.remove('text-hidden');
-        translateBtn.textContent = '戻す';
+        translateBtn.textContent = '原文';
     } else {
         text.classList.remove('text-hidden');
         textChange.classList.add('text-hidden');
