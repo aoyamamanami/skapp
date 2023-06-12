@@ -39,8 +39,6 @@ class PostController extends Controller
         $input = $request['post'];
         $sentence = $input["body"];
         
-        $key = env('DEEPL_KEY');
-        
         if (preg_match("/[ぁ-ん]+|[ァ-ヴー]+|[一-龠]/u", $sentence)){
             $source = 'JA';
             $target = 'EN';
@@ -49,18 +47,7 @@ class PostController extends Controller
             $target = 'JA';
         }
         
-        $response = Http::get(
-            'https://api-free.deepl.com/v2/translate',
-            [
-                'auth_key' => $key,
-                'target_lang' => $target,
-                'source_lang' => $source,
-                'text' => $sentence,
-            ]
-        );
-        
-        $translation = $response->json('translations')[0]['text'];
-        $input["translation"] = $translation;
+        $input["translation"] = \Common::deepl($source, $target, $sentence); //App\Libs\Common関数を呼び出し
         $input["user_id"] = Auth::id();
         
         $post->fill($input)->save();
@@ -78,8 +65,6 @@ class PostController extends Controller
         $input_post = $request['post'];
         $sentence = $input_post['body'];
         
-        $key = env('DEEPL_KEY');
-        
         if (preg_match("/[ぁ-ん]+|[ァ-ヴー]+|[一-龠]/u", $sentence)){
             $source = 'JA';
             $target = 'EN';
@@ -88,19 +73,7 @@ class PostController extends Controller
             $target = 'JA';
         }
         
-        $response = Http::get(
-            'https://api-free.deepl.com/v2/translate',
-            [
-                'auth_key' => $key,
-                'target_lang' => $target,
-                'source_lang' => $source,
-                'text' => $sentence,
-            ]
-        );
-        
-        $translation = $response->json('translations')[0]['text'];
-        $input_post["translation"] = $translation;
-        
+        $input_post["translation"] = \Common::deepl($source, $target, $sentence);
 
         $post->fill($input_post)->save();
 
